@@ -5,53 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>iMovieHUB</title>
 
-<!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-/* =====================
-   GLOBAL STYLES
-===================== */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #0f0f0f;
-  color: #fff;
+  color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* =====================
-   NAVBAR
-===================== */
+/* ================= NAVBAR ================= */
 .navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 15px 40px;
-  background: linear-gradient(to bottom, #000, transparent);
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
+  align-items: center;
+  padding: 14px 32px;
+  background: #000;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: bold;
   color: #e50914;
 }
 
 .search-bar {
   padding: 8px 12px;
-  border-radius: 5px;
+  border-radius: 6px;
   border: none;
+  width: 220px;
 }
 
-/* =====================
-   BANNER
-===================== */
+/* ================= BANNER ================= */
 .banner {
-  height: 70vh;
-  background: linear-gradient(to top, #000, transparent),
-              url("https://image.tmdb.org/t/p/original/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg") center/cover;
+  height: 65vh;
+  background:
+    linear-gradient(to top, #000, transparent),
+    url("https://images.unsplash.com/photo-1517602302552-471fe67acf66")
+    center/cover no-repeat;
   display: flex;
   align-items: flex-end;
   padding: 40px;
@@ -61,75 +61,108 @@ body {
   font-size: 48px;
 }
 
-/* =====================
-   ROWS
-===================== */
+/* ================= ROWS ================= */
 .row {
-  margin: 30px;
+  margin: 32px;
 }
 
 .row h2 {
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
 .list {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   overflow-x: auto;
 }
 
 .card {
-  min-width: 160px;
+  min-width: 180px;
   cursor: pointer;
   transition: transform 0.3s;
 }
 
 .card img {
   width: 100%;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .card:hover {
   transform: scale(1.1);
 }
 
-/* =====================
-   MODAL
-===================== */
+/* ================= MODAL ================= */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.9);
-  z-index: 2000;
-  padding: 30px;
+  background: rgba(0,0,0,0.95);
+  z-index: 1000;
 }
 
 .modal-content {
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
+  padding: 20px;
 }
 
 .close {
-  font-size: 28px;
+  font-size: 30px;
   cursor: pointer;
-  float: right;
+  text-align: right;
 }
 
-iframe {
+video {
   width: 100%;
-  height: 480px;
-  margin-top: 20px;
-  border-radius: 8px;
+  max-height: 80vh;
+  border-radius: 10px;
 }
 
-/* =====================
-   FOOTER
-===================== */
+/* ================= FOOTER ================= */
 footer {
   text-align: center;
   padding: 30px;
   opacity: 0.6;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 16px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .search-bar {
+    width: 120px;
+  }
+
+  .banner {
+    height: 45vh;
+    padding: 20px;
+  }
+
+  .banner h1 {
+    font-size: 28px;
+  }
+
+  .row {
+    margin: 16px;
+  }
+
+  .row h2 {
+    font-size: 18px;
+  }
+
+  .card {
+    min-width: 120px;
+  }
+
+  video {
+    max-height: 60vh;
+  }
 }
 </style>
 </head>
@@ -139,116 +172,79 @@ footer {
 <!-- NAVBAR -->
 <div class="navbar">
   <div class="logo">🎬 iMovieHUB</div>
-  <input class="search-bar" placeholder="Search (demo)">
+  <input class="search-bar" placeholder="Search">
 </div>
 
 <!-- BANNER -->
 <div class="banner">
-  <h1>Unlimited Movies & TV</h1>
+  <h1>Watch Anywhere</h1>
 </div>
 
 <!-- MOVIES -->
 <div class="row">
-  <h2>Trending Movies</h2>
+  <h2>Featured Movies</h2>
   <div class="list" id="movies"></div>
 </div>
 
 <!-- TV -->
 <div class="row">
-  <h2>Trending TV Shows</h2>
+  <h2>TV Shows</h2>
   <div class="list" id="tv"></div>
 </div>
 
-<!-- MODAL -->
+<!-- PLAYER MODAL -->
 <div class="modal" id="modal">
   <div class="modal-content">
-    <span class="close" onclick="closeModal()">✖</span>
-    <h2 id="modal-title"></h2>
-    <iframe id="player" allowfullscreen></iframe>
+    <div class="close" onclick="closeModal()">✖</div>
+    <video id="player" controls autoplay playsinline>
+      <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4">
+    </video>
   </div>
 </div>
 
 <footer>
-  © 2025 iMovieHUB
+  © 2025 <strong>iMovieHUB</strong> — Demo Website
 </footer>
 
 <script>
-/* =====================
-   DEMO DATA (TMDB IDs)
-===================== */
 const movies = [
-  { id: 550, poster: "https://image.tmdb.org/t/p/w300/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg", title: "Fight Club" },
-  { id: 603, poster: "https://image.tmdb.org/t/p/w300/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg", title: "The Matrix" }
+  { title: "Movie One", poster: "https://picsum.photos/300/450?31" },
+  { title: "Movie Two", poster: "https://picsum.photos/300/450?32" },
+  { title: "Movie Three", poster: "https://picsum.photos/300/450?33" }
 ];
 
 const tvShows = [
-  { id: 1399, poster: "https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg", title: "Game of Thrones" }
+  { title: "Series One", poster: "https://picsum.photos/300/450?34" },
+  { title: "Series Two", poster: "https://picsum.photos/300/450?35" }
 ];
 
-let currentEpisode = 1;
-let currentSeason = 1;
-let currentTV = null;
-
-/* =====================
-   LOAD CARDS
-===================== */
 function load() {
   movies.forEach(m => {
     document.getElementById("movies").innerHTML += `
-      <div class="card" onclick="playMovie(${m.id}, '${m.title}')">
+      <div class="card" onclick="openModal('${m.title}')">
         <img src="${m.poster}">
       </div>`;
   });
 
   tvShows.forEach(t => {
     document.getElementById("tv").innerHTML += `
-      <div class="card" onclick="playTV(${t.id}, '${t.title}')">
+      <div class="card" onclick="openModal('${t.title}')">
         <img src="${t.poster}">
       </div>`;
   });
 }
-load();
 
-/* =====================
-   PLAY MOVIE (AUTO PLAY)
-===================== */
-function playMovie(id, title) {
+function openModal(title) {
   document.getElementById("modal").style.display = "block";
-  document.getElementById("modal-title").innerText = title;
-  document.getElementById("player").src =
-    `https://apimocine.vercel.app/movie/${id}?autoplay=1`;
+  document.getElementById("player").play();
 }
 
-/* =====================
-   PLAY TV + AUTO NEXT
-===================== */
-function playTV(id, title) {
-  currentTV = id;
-  currentSeason = 1;
-  currentEpisode = 1;
-  document.getElementById("modal").style.display = "block";
-  document.getElementById("modal-title").innerText = title;
-  playNextEpisode();
-}
-
-function playNextEpisode() {
-  document.getElementById("player").src =
-    `https://apimocine.vercel.app/tv/${currentTV}/${currentSeason}/${currentEpisode}?autoplay=1`;
-
-  // Auto-next fallback (45 min per episode)
-  setTimeout(() => {
-    currentEpisode++;
-    playNextEpisode();
-  }, 2700000);
-}
-
-/* =====================
-   CLOSE MODAL
-===================== */
 function closeModal() {
   document.getElementById("modal").style.display = "none";
-  document.getElementById("player").src = "";
+  document.getElementById("player").pause();
 }
+
+load();
 </script>
 
 </body>
