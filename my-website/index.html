@@ -1,84 +1,255 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Website</title>
-  <link rel="stylesheet" href="css/home.css">
-  <link rel="preload" href="css/home.css" as="style">
-  <link rel="preload" href="js/home.js" as="script">
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script defer src="js/home.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iMovieHUB</title>
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+/* =====================
+   GLOBAL STYLES
+===================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0f0f0f;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =====================
+   NAVBAR
+===================== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: linear-gradient(to bottom, #000, transparent);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #e50914;
+}
+
+.search-bar {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
+}
+
+/* =====================
+   BANNER
+===================== */
+.banner {
+  height: 70vh;
+  background: linear-gradient(to top, #000, transparent),
+              url("https://image.tmdb.org/t/p/original/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg") center/cover;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+}
+
+.banner h1 {
+  font-size: 48px;
+}
+
+/* =====================
+   ROWS
+===================== */
+.row {
+  margin: 30px;
+}
+
+.row h2 {
+  margin-bottom: 15px;
+}
+
+.list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.card {
+  min-width: 160px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+/* =====================
+   MODAL
+===================== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 2000;
+  padding: 30px;
+}
+
+.modal-content {
+  max-width: 900px;
+  margin: auto;
+}
+
+.close {
+  font-size: 28px;
+  cursor: pointer;
+  float: right;
+}
+
+iframe {
+  width: 100%;
+  height: 480px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+/* =====================
+   FOOTER
+===================== */
+footer {
+  text-align: center;
+  padding: 30px;
+  opacity: 0.6;
+}
+</style>
 </head>
 
 <body>
-  <div class="navbar">
-    <img src="logo.png" alt="LOGO HERE" />
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <input type="text" class="search-bar" placeholder="Search..." onfocus="openSearchModal()" />
-    </div>
-  </div>
 
-  <div class="banner" id="banner">
-    <h1 id="banner-title"></h1>
-  </div>
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">🎬 iMovieHUB</div>
+  <input class="search-bar" placeholder="Search (demo)">
+</div>
 
-  <div class="row">
-    <h2>Trending Movies</h2>
-    <div class="list" id="movies-list"></div>
-  </div>
+<!-- BANNER -->
+<div class="banner">
+  <h1>Unlimited Movies & TV</h1>
+</div>
 
-  <div class="row">
-    <h2>Trending TV Shows</h2>
-    <div class="list" id="tvshows-list"></div>
-  </div>
+<!-- MOVIES -->
+<div class="row">
+  <h2>Trending Movies</h2>
+  <div class="list" id="movies"></div>
+</div>
 
-  <div class="row">
-    <h2>Trending Anime</h2>
-    <div class="list" id="anime-list"></div>
-  </div>
+<!-- TV -->
+<div class="row">
+  <h2>Trending TV Shows</h2>
+  <div class="list" id="tv"></div>
+</div>
 
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()" style="color: red;">&times;</span>
-      <div class="modal-body">
-  <img id="modal-image" src="" alt="" />
-  <div class="modal-text">
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">✖</span>
     <h2 id="modal-title"></h2>
-    <div class="stars" id="modal-rating"></div>
-    <p id="modal-description"></p>
+    <iframe id="player" allowfullscreen></iframe>
   </div>
 </div>
-      
-      <div class="server-selector">
-        <label for="server">Change Server:</label>
-        <select id="server" onchange="changeServer()">
-          <option value="vidsrc.cc">Vidsrc.cc</option>
-          <option value="vidsrc.me">Vidsrc.me</option>
-          <option value="player.videasy.net">Player.Videasy.net</option>
-        </select>
-      </div>
-      <iframe id="modal-video" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
 
-  <div class="search-modal" id="search-modal">
-    <span class="close" onclick="closeSearchModal()" style="color: red;">&times;</span>
-    <input type="text" id="search-input" placeholder="Search for a movie or show..." oninput="searchTMDB()" />
-    <div class="results" id="search-results"></div>
-  </div>
-
-<footer class="footer">
-  <div class="footer-content">
-    <p>&copy; 2025 My Website. All rights reserved.</p>
-    <div class="footer-links">
-      <a href="#">Disclaimer</a>
-      <a href="#">About Us</a>
-      <a href="#">Contact Us</a>
-    </div>
-  </div>
+<footer>
+  © 2025 iMovieHUB
 </footer>
 
-  
+<script>
+/* =====================
+   DEMO DATA (TMDB IDs)
+===================== */
+const movies = [
+  { id: 550, poster: "https://image.tmdb.org/t/p/w300/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg", title: "Fight Club" },
+  { id: 603, poster: "https://image.tmdb.org/t/p/w300/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg", title: "The Matrix" }
+];
+
+const tvShows = [
+  { id: 1399, poster: "https://image.tmdb.org/t/p/w300/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg", title: "Game of Thrones" }
+];
+
+let currentEpisode = 1;
+let currentSeason = 1;
+let currentTV = null;
+
+/* =====================
+   LOAD CARDS
+===================== */
+function load() {
+  movies.forEach(m => {
+    document.getElementById("movies").innerHTML += `
+      <div class="card" onclick="playMovie(${m.id}, '${m.title}')">
+        <img src="${m.poster}">
+      </div>`;
+  });
+
+  tvShows.forEach(t => {
+    document.getElementById("tv").innerHTML += `
+      <div class="card" onclick="playTV(${t.id}, '${t.title}')">
+        <img src="${t.poster}">
+      </div>`;
+  });
+}
+load();
+
+/* =====================
+   PLAY MOVIE (AUTO PLAY)
+===================== */
+function playMovie(id, title) {
+  document.getElementById("modal").style.display = "block";
+  document.getElementById("modal-title").innerText = title;
+  document.getElementById("player").src =
+    `https://apimocine.vercel.app/movie/${id}?autoplay=1`;
+}
+
+/* =====================
+   PLAY TV + AUTO NEXT
+===================== */
+function playTV(id, title) {
+  currentTV = id;
+  currentSeason = 1;
+  currentEpisode = 1;
+  document.getElementById("modal").style.display = "block";
+  document.getElementById("modal-title").innerText = title;
+  playNextEpisode();
+}
+
+function playNextEpisode() {
+  document.getElementById("player").src =
+    `https://apimocine.vercel.app/tv/${currentTV}/${currentSeason}/${currentEpisode}?autoplay=1`;
+
+  // Auto-next fallback (45 min per episode)
+  setTimeout(() => {
+    currentEpisode++;
+    playNextEpisode();
+  }, 2700000);
+}
+
+/* =====================
+   CLOSE MODAL
+===================== */
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+  document.getElementById("player").src = "";
+}
+</script>
+
 </body>
+</html>
