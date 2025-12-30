@@ -1,7 +1,38 @@
-const API_KEY = 'a1e72fd93ed59f56e6332813b9f8dcae';
+const API_KEY = '0929d17296f3c3e69d36b336e02da9c7';
     const BASE_URL = 'https://api.themoviedb.org/3';
     const IMG_URL = 'https://image.tmdb.org/t/p/original';
     let currentItem;
+
+let bannerMovie = null;
+
+async function loadBanner(movie) {
+  bannerMovie = movie;
+
+  document.getElementById("banner-title").textContent =
+    movie.title || movie.name;
+
+  const videoEl = document.getElementById("banner-video");
+
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=0929d17296f3c3e69d36b336e02da9c7`
+    );
+    const data = await res.json();
+
+    const trailer = data.results.find(
+      v => v.type === "Trailer" && v.site === "YouTube"
+    );
+
+    if (trailer) {
+      videoEl.src = `https://www.youtube.com/embed/${trailer.key}?autoplay=1&mute=1&loop=1&playlist=${trailer.key}`;
+    } else {
+      fallbackBanner(movie);
+    }
+  } catch {
+    fallbackBanner(movie);
+  }
+}
+
 
     async function fetchTrending(type) {
       const res = await fetch(`${BASE_URL}/trending/${type}/week?api_key=${API_KEY}`);
@@ -25,6 +56,19 @@ const API_KEY = 'a1e72fd93ed59f56e6332813b9f8dcae';
   return allResults;
 }
 
+function playBannerMovie() {
+  if (!bannerMovie) return;
+  openModal(bannerMovie, "movie");
+}
+
+function fallbackBanner(movie) {
+  const banner = document.getElementById("banner");
+  document.getElementById("banner-video").style.display = "none";
+
+  banner.style.backgroundImage =
+    `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`;
+  banner.style.backgroundSize = "cover";
+}
 
     function displayBanner(item) {
       document.getElementById('banner').style.backgroundImage = `url(${IMG_URL}${item.backdrop_path})`;
@@ -119,5 +163,6 @@ const API_KEY = 'a1e72fd93ed59f56e6332813b9f8dcae';
       displayList(tvShows, 'tvshows-list');
       displayList(anime, 'anime-list');
     }
+
 
     init();
