@@ -43,23 +43,18 @@
   </div>
 </div>
 
-  <div class="banner" id="banner" onclick="playBannerMovie()">
-  <video
+  <div class="banner" id="banner">
+  <iframe
     id="banner-video"
-    autoplay
-    muted
-    loop
-    playsinline
-  ></video>
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+  ></iframe>
 
   <div class="banner-overlay">
     <h1 id="banner-title"></h1>
-    <button class="banner-play">
-      <i class="fas fa-play"></i> Play
-    </button>
   </div>
 </div>
-
 
   <div class="row" id="continue-row" style="display:none;">
   <h2>Continue Watching</h2>
@@ -145,6 +140,7 @@
 <!-- PopAds Optimized End -->
 
 </body>
+
 
 
 
