@@ -460,3 +460,9 @@ body {
     height: 38px;
   }
 }
+/* Mobile tap target improvement */
+button,
+select {
+  min-height: 44px;
+}
+
