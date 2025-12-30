@@ -117,7 +117,54 @@
   </div>
 </footer>
 
+  <!-- PopAds Optimized -->
+<script type="text/javascript" data-cfasync="false">
+(function () {
+  let loaded = false;
+
+  function loadPopAds() {
+    if (loaded) return;
+    loaded = true;
+
+    /*<![CDATA[/* */
+    (function(){var p=window,e="fcb2e2cda66404b27fdb96cd39567449",
+    z=[["siteId",765-965*631+124+5873053],["minBid",0],
+    ["popundersPerIP","0"],["delayBetween",0],
+    ["default",false],["defaultPerDay",0],["topmostLayer","auto"]],
+    r=["d3d3LmNkbjRhZHMuY29tL2NUZXoubWluLmNzcw==",
+       "ZDNnNW92Zm5nanc5YncuY2xvdWRmcm9udC5uZXQvckdMbGN0L3F1cmwubWluLmpz"],
+    b=-1,d,u,f=function(){clearTimeout(u);b++;
+    if(r[b]&&!(1792982272000<(new Date).getTime()&&1<b)){
+      d=p.document.createElement("script");
+      d.type="text/javascript";d.async=!0;
+      var y=p.document.getElementsByTagName("script")[0];
+      d.src="https://"+atob(r[b]);
+      d.crossOrigin="anonymous";
+      d.onerror=f;
+      d.onload=function(){
+        clearTimeout(u);
+        p[e.slice(0,16)+e.slice(0,16)]||f()
+      };
+      u=setTimeout(f,5E3);
+      y.parentNode.insertBefore(d,y)
+    }};
+    if(!p[e]){
+      try{Object.freeze(p[e]=z)}catch(e){}
+      f()
+    }})();
+    /*]]>/* */
+  }
+
+  // Trigger ONLY after real user action
+  document.addEventListener("click", loadPopAds, { once: true });
+  document.addEventListener("scroll", loadPopAds, { once: true });
+  document.addEventListener("touchstart", loadPopAds, { once: true });
+})();
+</script>
+
+
 </body>
+</html>
 
 
 
