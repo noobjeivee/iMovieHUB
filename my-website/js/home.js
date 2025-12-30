@@ -83,6 +83,13 @@ function saveContinueWatching(item) {
       }
 
       document.getElementById('modal-video').src = embedURL;
+        saveContinueWatching({
+  id: movie.id,
+  title: movie.title || movie.name,
+  poster: movie.poster_path,
+  type: movie.media_type
+});
+
     }
 
     function closeModal() {
