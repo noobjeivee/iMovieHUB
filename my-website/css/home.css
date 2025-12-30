@@ -466,3 +466,28 @@ select {
   min-height: 44px;
 }
 
+.search-modal {
+  padding: 20px;
+}
+
+.search-modal input {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.results {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.results img {
+  width: 100%;
+  border-radius: 8px;
+}
+
