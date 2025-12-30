@@ -43,9 +43,23 @@
   </div>
 </div>
 
-  <div class="banner" id="banner">
+  <div class="banner" id="banner" onclick="playBannerMovie()">
+  <video
+    id="banner-video"
+    autoplay
+    muted
+    loop
+    playsinline
+  ></video>
+
+  <div class="banner-overlay">
     <h1 id="banner-title"></h1>
+    <button class="banner-play">
+      <i class="fas fa-play"></i> Play
+    </button>
   </div>
+</div>
+
 
   <div class="row" id="continue-row" style="display:none;">
   <h2>Continue Watching</h2>
@@ -131,6 +145,7 @@
 <!-- PopAds Optimized End -->
 
 </body>
+
 
 
 
