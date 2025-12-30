@@ -124,3 +124,11 @@ const API_KEY = '0929d17296f3c3e69d36b336e02da9c7';
 
     init();
 
+// Open search with "/" key
+document.addEventListener("keydown", function (e) {
+  if (e.key === "/" && !document.getElementById("search-modal").classList.contains("active")) {
+    e.preventDefault();
+    openSearchModal();
+  }
+});
+
