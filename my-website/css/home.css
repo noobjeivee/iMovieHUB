@@ -491,3 +491,45 @@ select {
   border-radius: 8px;
 }
 
+/* =========================
+   AUTOPLAY BANNER VIDEO
+========================= */
+.banner {
+  position: relative;
+  height: 60vh;
+  overflow: hidden;
+}
+
+#banner-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.85),
+    rgba(0,0,0,0.2)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+}
+
+.banner-play {
+  margin-top: 15px;
+  background: white;
+  color: black;
+  border: none;
+  padding: 12px 22px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
