@@ -154,4 +154,28 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
+function loadContinueWatching() {
+  const list = JSON.parse(localStorage.getItem("continueWatching")) || [];
+  const row = document.getElementById("continue-row");
+  const container = document.getElementById("continue-list");
+
+  if (!list.length) return;
+
+  row.style.display = "block";
+  container.innerHTML = "";
+
+  list.forEach(item => {
+    const img = document.createElement("img");
+    img.src = `https://image.tmdb.org/t/p/w300${item.poster}`;
+    img.loading = "lazy";
+
+    img.onclick = () => {
+      openModal(item.id, item.type);
+    };
+
+    container.appendChild(img);
+  });
+}
+loadContinueWatching();
+
 
