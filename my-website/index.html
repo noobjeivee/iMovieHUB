@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iMovieHUB</title>
+<title>iMovieHub</title>
 
 <style>
 * {
@@ -14,7 +14,7 @@
 
 body {
   background: #0f0f0f;
-  color: #fff;
+  color: #ffffff;
   font-family: Arial, sans-serif;
 }
 
@@ -23,26 +23,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
+  padding: 14px 20px;
   background: #141414;
   position: sticky;
   top: 0;
 }
 
-.navbar img {
-  height: 40px;
-}
-
-.navbar a {
-  color: #fff;
-  text-decoration: none;
-  margin-right: 15px;
-}
-
-.search-bar {
-  padding: 8px 12px;
-  border-radius: 20px;
-  border: none;
+.navbar h1 {
+  font-size: 1.4rem;
 }
 
 /* BANNER */
@@ -54,26 +42,27 @@ body {
   padding: 20px;
 }
 
-.banner h1 {
+.banner h2 {
   font-size: 1.6rem;
 }
 
 /* SECTIONS */
-.row {
+.section {
   padding: 20px;
 }
 
-.row h2 {
-  margin-bottom: 10px;
+.section h3 {
+  margin-bottom: 12px;
 }
 
-/* POSTERS */
-.list {
+/* GRID */
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 15px;
 }
 
+/* POSTER */
 .poster {
   background: #222;
   height: 200px;
@@ -82,10 +71,15 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
+  transition: transform 0.3s;
+}
+
+.poster:hover {
+  transform: scale(1.05);
 }
 
 /* FOOTER */
-.footer {
+footer {
   background: #141414;
   padding: 15px;
   text-align: center;
@@ -98,6 +92,10 @@ body {
   .banner {
     height: 180px;
   }
+
+  .banner h2 {
+    font-size: 1.3rem;
+  }
 }
 </style>
 </head>
@@ -106,33 +104,30 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <img src="logo.png" alt="Logo">
-  <div>
-    <a href="#">Home</a>
-    <input class="search-bar" placeholder="Search (disabled)">
-  </div>
+  <h1>🎬 iMovieHub</h1>
 </div>
 
 <!-- BANNER -->
 <div class="banner">
-  <h1>Welcome to iMovieHUB</h1>
+  <h2>Watch Movies, TV Shows & Anime</h2>
 </div>
 
 <!-- MOVIES -->
-<div class="row">
-  <h2>Trending Movies</h2>
-  <div class="list">
+<div class="section">
+  <h3>Trending Movies</h3>
+  <div class="grid">
     <div class="poster">Movie 1</div>
     <div class="poster">Movie 2</div>
     <div class="poster">Movie 3</div>
     <div class="poster">Movie 4</div>
+    <div class="poster">Movie 5</div>
   </div>
 </div>
 
 <!-- TV SHOWS -->
-<div class="row">
-  <h2>Trending TV Shows</h2>
-  <div class="list">
+<div class="section">
+  <h3>Trending TV Shows</h3>
+  <div class="grid">
     <div class="poster">Show 1</div>
     <div class="poster">Show 2</div>
     <div class="poster">Show 3</div>
@@ -141,9 +136,9 @@ body {
 </div>
 
 <!-- ANIME -->
-<div class="row">
-  <h2>Trending Anime</h2>
-  <div class="list">
+<div class="section">
+  <h3>Trending Anime</h3>
+  <div class="grid">
     <div class="poster">Anime 1</div>
     <div class="poster">Anime 2</div>
     <div class="poster">Anime 3</div>
@@ -152,9 +147,9 @@ body {
 </div>
 
 <!-- FOOTER -->
-<div class="footer">
-  © 2025 iMovieHUB – All Rights Reserved
-</div>
+<footer>
+  © 2025 iMovieHub — All Rights Reserved
+</footer>
 
 </body>
 </html>
