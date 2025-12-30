@@ -36,6 +36,7 @@ const API_KEY = '0929d17296f3c3e69d36b336e02da9c7';
       container.innerHTML = '';
       items.forEach(item => {
         const img = document.createElement('img');
+        img.loading = "lazy";
         img.src = `${IMG_URL}${item.poster_path}`;
         img.alt = item.title || item.name;
         img.onclick = () => showDetails(item);
@@ -122,3 +123,4 @@ const API_KEY = '0929d17296f3c3e69d36b336e02da9c7';
 
 
     init();
+
