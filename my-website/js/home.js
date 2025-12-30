@@ -3,6 +3,21 @@ const API_KEY = '0929d17296f3c3e69d36b336e02da9c7';
     const IMG_URL = 'https://image.tmdb.org/t/p/original';
     let currentItem;
 
+function saveContinueWatching(item) {
+  let list = JSON.parse(localStorage.getItem("continueWatching")) || [];
+
+  // Remove duplicates
+  list = list.filter(i => i.id !== item.id);
+
+  // Add to top
+  list.unshift(item);
+
+  // Limit to 10 items
+  list = list.slice(0, 10);
+
+  localStorage.setItem("continueWatching", JSON.stringify(list));
+}
+
     async function fetchTrending(type) {
       const res = await fetch(`${BASE_URL}/trending/${type}/week?api_key=${API_KEY}`);
       const data = await res.json();
@@ -131,4 +146,5 @@ document.addEventListener("keydown", function (e) {
     openSearchModal();
   }
 });
+
 
